@@ -6,7 +6,7 @@ var url = require('url');
 
 proxy.createServer(function(req, res, proxy) {
 	
-	var target = url(req.url);
+	var target = url.parse(req.url);
 	
 	var options = {
 		host:	target.hostname,
