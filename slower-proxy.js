@@ -37,13 +37,16 @@ proxy.createServer(function(frontendRequest, frontendResponse, proxy) {
 		backendResponse._write = function(chunk, encoding, callback) {
 			console.log('_write', arguments);
 			callback();
-		}
+		};
+		
+		var end = backendResponse.end;
+		backendResponse.end = function() {
+			console.log('end');
+			end.apply(backendResponse, arguments);
+			frontendResponse.end();
+		};
 		
 		proxy.proxyRequest(frontendRequest, backendResponse, options);
-		
-		backendResponse.on('finished', function() {
-			backendResponse.pipe(frontendResponse);
-		});
 	}, argv.latency);
 	
 	
