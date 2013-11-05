@@ -26,7 +26,7 @@ proxy.createServer(function(frontendRequest, frontendResponse, proxy) {
 	console.log('Will proxy `'+ frontendRequest.url +'\' at `'+ options.host +'\':`'+ options.port +'\'');
 	
 	setTimeout(function() {
-		var backendResponse = new stream.Writeable();
+		var backendResponse = new stream.Writable();
 		proxy.proxyRequest(frontendRequest, backendResponse, options);
 		
 		backendResponse.on('finished', function() {
