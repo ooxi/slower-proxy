@@ -5,6 +5,9 @@ var proxy = require('http-proxy');
 
 proxy.createServer(function(req, res, proxy) {
 	
-	proxy.proxyRequest(req, res);
+	var options = {
+		target: req.headers.host
+	};
+	proxy.proxyRequest(req, res, options);
 	
 }).listen(8080);
