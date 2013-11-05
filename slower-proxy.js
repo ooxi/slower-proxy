@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 var argv = require('optimist')
+	.default('latency', 0).describe('latency', 'Connection setup latency in ms')
+	.default('bandwidth', Infinity).describe('bandwidth', 'Connection bandwidth in kbit/sec')
 .argv;
 
 var proxy = require('http-proxy');
