@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
-//var http = require('http');
+var argv = require('optimist')
+.argv;
+
 var proxy = require('http-proxy');
 var url = require('url');
 
