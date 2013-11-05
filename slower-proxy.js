@@ -10,7 +10,7 @@ proxy.createServer(function(req, res, proxy) {
 	
 	var options = {
 		host:	target.hostname,
-		port:	target.port
+		port:	target.port ? target.port : 80
 	};
 	req.url = target.path;
 	console.log('Will proxy `'+ req.url +'\' at `'+ options.host +'\':`'+ options.port +'\'');
