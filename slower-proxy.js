@@ -29,10 +29,10 @@ proxy.createServer(function(frontendRequest, frontendResponse, proxy) {
 		var backendResponse = new stream.Writable();
 		
 		backendResponse.setHeader = function() {
-			console.log('setHeader', arguments);
+			frontendResponse.setHeader.apply(frontendResponse, arguments);
 		};
 		backendResponse.writeHead = function() {
-			console.log('writeHead', arguments);
+			frontendResponse.writeHead.apply(frontendResponse, arguments);
 		};
 		backendResponse._write = function(chunk, encoding, callback) {
 			console.log('_write', arguments);
