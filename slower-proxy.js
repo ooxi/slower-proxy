@@ -34,6 +34,10 @@ proxy.createServer(function(frontendRequest, frontendResponse, proxy) {
 		backendResponse.writeHead = function() {
 			console.log(arguments);
 		};
+		backendResponse._write = function(chunk, encoding, callback) {
+			console.log(arguments);
+			callback();
+		}
 		
 		proxy.proxyRequest(frontendRequest, backendResponse, options);
 		
