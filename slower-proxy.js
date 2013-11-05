@@ -43,7 +43,7 @@ proxy.createServer(function(frontendRequest, frontendResponse, proxy) {
 		backendResponse.end = function() {
 			console.log('end');
 			end.apply(backendResponse, arguments);
-			frontendResponse.end();
+			backendResponse.pipe(frontendResponse).end();
 		};
 		
 		proxy.proxyRequest(frontendRequest, backendResponse, options);
