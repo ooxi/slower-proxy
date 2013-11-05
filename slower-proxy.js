@@ -28,6 +28,9 @@ proxy.createServer(function(frontendRequest, frontendResponse, proxy) {
 	setTimeout(function() {
 		var backendResponse = new stream.Writable();
 		
+		backendResponse.setHeader = function() {
+			console.log(arguments);
+		};
 		backendResponse.writeHead = function() {
 			console.log(arguments);
 		};
