@@ -6,22 +6,32 @@ var argv = require('optimist')
 .argv;
 
 var proxy = require('http-proxy');
+var stream = require('stream');
 var throttle = require('throttle');
 var url = require('url');
 
-proxy.createServer(function(req, res, proxy) {
+
+
+
+
+proxy.createServer(function(frontendRequest, frontendResponse, proxy) {
 	
-	var target = url.parse(req.url);
+	var target = url.parse(frontendRequest.url);
 	
 	var options = {
 		host:	target.hostname,
 		port:	target.port ? target.port : 80
 	};
-	req.url = target.path;
-	console.log('Will proxy `'+ req.url +'\' at `'+ options.host +'\':`'+ options.port +'\'');
+	frontendRequest.url = target.path;
+	console.log('Will proxy `'+ frontendRequest.url +'\' at `'+ options.host +'\':`'+ options.port +'\'');
 	
 	setTimeout(function() {
-		proxy.proxyRequest(req, res, options);
+		var backendResponse = new stream.Writeable();
+		proxy.proxyRequest(frontendRequest, backendResponse, options);
+		
+		backendResponse.on('finished', function() {
+			backendResponse.pipe(frontendResponse);
+		});
 	}, argv.latency);
 	
 	
