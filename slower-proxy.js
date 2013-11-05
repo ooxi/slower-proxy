@@ -10,9 +10,9 @@ proxy.createServer(function(req, res, proxy) {
 	
 	var options = {
 		host: -1 === colon ? host : host.substr(0, colon),
-		port: -1 === colon ? 80 : parseInt(host.substr(colon))
+		port: -1 === colon ? 80 : parseInt(host.substr(colon + 1))
 	};
-	console.log(options);
+	console.log('Will proxy `'+ req.url +'\' at `'+ options.host +'\':`'+ options.port +'\'');
 	
 	proxy.proxyRequest(req, res, options);
 	
