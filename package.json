@@ -1,0 +1,14 @@
+{
+	"name":		"slower-proxy",
+	"description":	"Uses node.js to simulate a slow network connection, being able to simulate both low bandwith and high latency",
+	"version":	"0.0.1",
+	"author":	"ooxi <violetland@mail.ru>",
+	
+	"repository": {
+		"type":	"git",
+		"url":	"https://github.com/ooxi/slower-proxy.git"
+	},
+	
+	"dependencies": {
+	}
+}
