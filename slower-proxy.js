@@ -27,6 +27,11 @@ proxy.createServer(function(frontendRequest, frontendResponse, proxy) {
 	
 	setTimeout(function() {
 		var backendResponse = new stream.Writable();
+		
+		backendResponse.writeHead = function() {
+			console.log(arguments);
+		};
+		
 		proxy.proxyRequest(frontendRequest, backendResponse, options);
 		
 		backendResponse.on('finished', function() {
