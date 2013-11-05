@@ -20,6 +20,9 @@ proxy.createServer(function(req, res, proxy) {
 	req.url = target.path;
 	console.log('Will proxy `'+ req.url +'\' at `'+ options.host +'\':`'+ options.port +'\'');
 	
-	proxy.proxyRequest(req, res, options);
+	setTimeout(function() {
+		proxy.proxyRequest(req, res, options);
+	}, argv.latency);
+	
 	
 }).listen(8080);
